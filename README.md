@@ -1,16 +1,29 @@
-## Hi there 👋
+const int ledPin = 9;
+// LED state
+int ledState = LOW;
+// time since last LED was on
+unsigned long previousMillis = 0;
+// LED flashing interval
+const long interval = 1000;
 
-<!--
-**rodniehp/rodniehp** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+void setup() {
+  pinMode(ledPin, OUTPUT);
+}
 
-Here are some ideas to get you started:
+void loop() {
+  unsigned long currentMillis = millis();
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+  if (currentMillis - previousMillis >= interval) {
+    previousMillis = currentMillis;
+
+    if (ledState == LOW) {
+      ledState = HIGH;
+    } else {
+      ledState = LOW;
+    }
+
+    // set LED state:
+    digitalWrite(ledPin, ledState);
+  }
+}
+
